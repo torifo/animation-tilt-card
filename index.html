@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D ティルトカード — Animation Studies</title>
+  <meta name="description" content="マウス位置に応じてカードが 3D で傾き、表面のホログラム反射が滑らかに移動する。架空デザインスタジオ Studio HALO の作品キュレーションサイトとして 6 枚のカードで実用例を提示。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<header class="site">
+  <a class="back" href="../">
+    <span class="arrow">←</span>
+    <span>ANIMATION · INDEX</span>
+  </a>
+  <span class="cell-marker">TILT CARD</span>
+</header>
+
+<main>
+
+  <!-- ─── intro ─── -->
+  <section class="intro">
+    <span class="kicker">STUDIO HALO · works</span>
+    <h1>The objects<br/>before<br/><em>the brief.</em></h1>
+    <p class="lead">マウス位置に応じてカードが 3D で傾き、表面のホログラム反射が滑らかに移動する。架空のソロデザインスタジオ <strong>Studio HALO</strong> の作品キュレーションサイトとして組み込んだ実用デモ。タッチデバイスではティルトを無効にし、静的なカード一覧として動作する。</p>
+  </section>
+
+  <!-- ─── The Reusable Component（tilt cards grid） ─── -->
+  <section class="halo" data-tilt-root>
+
+    <!-- studio info strip -->
+    <header class="hl-masthead">
+      <div class="hl-brand">
+        <span class="hl-mark" aria-hidden="true">
+          <i class="hm-ring"></i>
+          <i class="hm-core"></i>
+        </span>
+        <span class="hl-name">Studio HALO</span>
+        <span class="hl-sub">graphic design · Tokyo / Berlin</span>
+      </div>
+      <ul class="hl-meta">
+        <li><span>WORKS</span>24</li>
+        <li><span>EST</span>2019</li>
+        <li><span>CLIENTS</span>14 · global</li>
+      </ul>
+    </header>
+
+    <div class="hl-grid">
+
+      <!-- 01 TIDE -->
+      <article class="tilt-card tc--tide" data-tilt>
+        <div class="tc-inner">
+          <div class="tc-vis tc-vis--tide" aria-hidden="true">
+            <div class="v-wave wave-1"></div>
+            <div class="v-wave wave-2"></div>
+            <div class="v-wave wave-3"></div>
+            <div class="v-mark">TIDE</div>
+          </div>
+          <div class="tc-meta">
+            <span class="tc-no">WORK · 03</span>
+            <h3 class="tc-title">Tide<br/><em>identity</em></h3>
+            <dl class="tc-spec">
+              <dt>CLIENT</dt><dd>Atelier Nordstrand</dd>
+              <dt>YEAR</dt><dd>2024</dd>
+              <dt>SCOPE</dt><dd>identity · stationery · web</dd>
+            </dl>
+          </div>
+          <span class="tc-edition">EDITION · 03 / 24</span>
+          <div class="tc-gloss" data-tilt-gloss aria-hidden="true"></div>
+          <div class="tc-shine" data-tilt-shine aria-hidden="true"></div>
+        </div>
+      </article>
+
+      <!-- 02 Apex Motion -->
+      <article class="tilt-card tc--apex" data-tilt>
+        <div class="tc-inner">
+          <div class="tc-vis tc-vis--apex" aria-hidden="true">
+            <div class="v-mesh"></div>
+            <div class="v-grid"></div>
+            <div class="v-streak"></div>
+            <div class="v-mark">APEX</div>
+            <div class="v-mark-sub">/ MOTION 09</div>
+          </div>
+          <div class="tc-meta">
+            <span class="tc-no">WORK · 09</span>
+            <h3 class="tc-title">Apex<br/><em>title sequence</em></h3>
+            <dl class="tc-spec">
+              <dt>CLIENT</dt><dd>Apex Records</dd>
+              <dt>YEAR</dt><dd>2025</dd>
+              <dt>SCOPE</dt><dd>motion · type · sound design</dd>
+            </dl>
+          </div>
+          <span class="tc-edition">EDITION · 09 / 24</span>
+          <div class="tc-gloss" data-tilt-gloss aria-hidden="true"></div>
+          <div class="tc-shine" data-tilt-shine aria-hidden="true"></div>
+        </div>
+      </article>
+
+      <!-- 03 Field Notes -->
+      <article class="tilt-card tc--field" data-tilt>
+        <div class="tc-inner">
+          <div class="tc-vis tc-vis--field" aria-hidden="true">
+            <div class="v-paper"></div>
+            <div class="v-botanic"></div>
+            <div class="v-stamp">VOL · IV</div>
+            <div class="v-mark">Field<br/>Notes</div>
+          </div>
+          <div class="tc-meta">
+            <span class="tc-no">WORK · 12</span>
+            <h3 class="tc-title">Field<br/><em>Notes</em></h3>
+            <dl class="tc-spec">
+              <dt>CLIENT</dt><dd>Hardback Press</dd>
+              <dt>YEAR</dt><dd>2023</dd>
+              <dt>SCOPE</dt><dd>book series · 4 vols · cover &amp; type</dd>
+            </dl>
+          </div>
+          <span class="tc-edition">EDITION · 12 / 24</span>
+          <div class="tc-gloss" data-tilt-gloss aria-hidden="true"></div>
+          <div class="tc-shine" data-tilt-shine aria-hidden="true"></div>
+        </div>
+      </article>
+
+      <!-- 04 House of Mist -->
+      <article class="tilt-card tc--mist" data-tilt>
+        <div class="tc-inner">
+          <div class="tc-vis tc-vis--mist" aria-hidden="true">
+            <div class="v-fog"></div>
+            <div class="v-calli">⌒</div>
+            <div class="v-mark">House of Mist</div>
+            <div class="v-mark-sub">— a quiet kitchen</div>
+          </div>
+          <div class="tc-meta">
+            <span class="tc-no">WORK · 16</span>
+            <h3 class="tc-title">House of<br/><em>Mist</em></h3>
+            <dl class="tc-spec">
+              <dt>CLIENT</dt><dd>Mist Group</dd>
+              <dt>YEAR</dt><dd>2023</dd>
+              <dt>SCOPE</dt><dd>restaurant identity · menu · signage</dd>
+            </dl>
+          </div>
+          <span class="tc-edition">EDITION · 16 / 24</span>
+          <div class="tc-gloss" data-tilt-gloss aria-hidden="true"></div>
+          <div class="tc-shine" data-tilt-shine aria-hidden="true"></div>
+        </div>
+      </article>
+
+      <!-- 05 Quarterly 03 -->
+      <article class="tilt-card tc--quarterly" data-tilt>
+        <div class="tc-inner">
+          <div class="tc-vis tc-vis--quarterly" aria-hidden="true">
+            <div class="v-q-bg"></div>
+            <div class="v-q-rule"></div>
+            <div class="v-mark">QTR<br/>03</div>
+            <div class="v-mark-sub">SPRING / 2025</div>
+            <div class="v-stamp">ISSUE 03</div>
+          </div>
+          <div class="tc-meta">
+            <span class="tc-no">WORK · 21</span>
+            <h3 class="tc-title">Quarterly<br/><em>03</em></h3>
+            <dl class="tc-spec">
+              <dt>CLIENT</dt><dd>Editorial Mag</dd>
+              <dt>YEAR</dt><dd>2025</dd>
+              <dt>SCOPE</dt><dd>magazine direction · cover · type</dd>
+            </dl>
+          </div>
+          <span class="tc-edition">EDITION · 21 / 24</span>
+          <div class="tc-gloss" data-tilt-gloss aria-hidden="true"></div>
+          <div class="tc-shine" data-tilt-shine aria-hidden="true"></div>
+        </div>
+      </article>
+
+      <!-- 06 Strata Sound -->
+      <article class="tilt-card tc--strata" data-tilt>
+        <div class="tc-inner">
+          <div class="tc-vis tc-vis--strata" aria-hidden="true">
+            <div class="v-st-1"></div>
+            <div class="v-st-2"></div>
+            <div class="v-st-3"></div>
+            <div class="v-st-4"></div>
+            <div class="v-mark">strata</div>
+            <div class="v-mark-sub">sound · vol.02</div>
+          </div>
+          <div class="tc-meta">
+            <span class="tc-no">WORK · 23</span>
+            <h3 class="tc-title">Strata<br/><em>Sound</em></h3>
+            <dl class="tc-spec">
+              <dt>CLIENT</dt><dd>Strata Records</dd>
+              <dt>YEAR</dt><dd>2024</dd>
+              <dt>SCOPE</dt><dd>packaging · vol.01–04 · screen print</dd>
+            </dl>
+          </div>
+          <span class="tc-edition">EDITION · 23 / 24</span>
+          <div class="tc-gloss" data-tilt-gloss aria-hidden="true"></div>
+          <div class="tc-shine" data-tilt-shine aria-hidden="true"></div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- 連絡先・受賞・クライアント帯 -->
+    <footer class="hl-foot">
+      <div class="hl-foot-block">
+        <h4>CLIENTS</h4>
+        <p>Atelier Nordstrand · Apex Records · Hardback Press · Mist Group · Editorial Mag · Strata Records · NORM Books · Sundial Coffee · 五月の家 · Pith Magazine · Northbeach Hotel · Maru Studio · Quartz Foundry · Vermouth Society</p>
+      </div>
+      <div class="hl-foot-block hl-foot-block--narrow">
+        <h4>AWARDS</h4>
+        <ul>
+          <li>D&amp;AD Wood Pencil — 2024</li>
+          <li>Tokyo TDC — 2024</li>
+          <li>Brand New 50 — 2023</li>
+          <li>Type Directors Club — 2025</li>
+        </ul>
+      </div>
+      <div class="hl-foot-block hl-foot-block--narrow">
+        <h4>CONTACT</h4>
+        <p>hello@studio-halo.example<br/>+81 3 XXXX XXXX<br/>東京 / Berlin</p>
+        <button class="cta cta--solid" type="button">INQUIRE <span class="cta-arrow">→</span></button>
+      </div>
+    </footer>
+
+  </section>
+
+  <!-- ─── Usage notes ─── -->
+  <section class="notes">
+    <div class="shou"><h2>使い方</h2><span class="no">— USAGE</span></div>
+    <p class="frame">↑ 想定：ポートフォリオ／コレクション／プロダクトカタログ／ローンチ予定リスト。カード型 UI に <strong>奥行きと光沢</strong>を与えるだけで、平面が「現物」のように見えてくる。マウス・タッチでない情報伝達手段としても効く。</p>
+
+    <div class="notes-grid">
+      <div class="note">
+        <span class="note-no">01</span>
+        <h3>2 ファイルをコピー</h3>
+        <p><code>style.css</code> の <code>/* ─── COMPONENT ─── */</code> ブロックと、<code>script.js</code> の IIFE 全体を移植先へ。外部依存ゼロ。</p>
+      </div>
+      <div class="note">
+        <span class="note-no">02</span>
+        <h3>data-tilt で宣言</h3>
+        <p>各カードに <code>data-tilt</code> を付けるだけで自動初期化。<code>data-tilt-max</code>（最大傾き°、既定 14）、<code>data-tilt-perspective</code>（既定 900）、<code>data-tilt-scale</code>（hover 時の拡大、既定 1.04）でリズム調整。</p>
+      </div>
+      <div class="note">
+        <span class="note-no">03</span>
+        <h3>ホログラム層を 2 枚</h3>
+        <p>カード内に <code>[data-tilt-gloss]</code>（conic-gradient のホログラム）と <code>[data-tilt-shine]</code>（光帯）を入れると、傾きに応じて background-position が移動して光が動く。</p>
+      </div>
+    </div>
+
+    <h3 class="sub-h">カスタマイズ可能な属性</h3>
+    <div class="vars">
+      <div class="var"><code>data-tilt-max</code><span>最大傾き角（°）</span><em>14</em></div>
+      <div class="var"><code>data-tilt-perspective</code><span>奥行き（px）</span><em>900</em></div>
+      <div class="var"><code>data-tilt-scale</code><span>hover 時のスケール倍率</span><em>1.04</em></div>
+      <div class="var"><code>data-tilt-ease</code><span>追従の ease 係数（大きいほどスナップ）</span><em>0.14</em></div>
+    </div>
+
+    <h3 class="sub-h">アクセシビリティ</h3>
+    <ul class="a11y">
+      <li><code>prefers-reduced-motion: reduce</code> 時はティルトを無効化し、静的なカードとして表示。</li>
+      <li><code>pointer: coarse</code>（タッチ端末）でもティルトを無効化し、誤動作を避ける。</li>
+      <li>装飾ビジュアル要素は <code>aria-hidden</code>。本文（タイトル / dl）は通常のセマンティクス。</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2026 ANIMATION DESIGN STUDY</span>
+  <a href="../">← INDEX</a>
+</footer>
+
+<script src="./script.js"></script>
+</body>
+</html>

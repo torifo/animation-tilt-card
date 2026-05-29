@@ -1,0 +1,451 @@
+/* ════════════════════════════════════════════════════════════════
+   D·Ho · Tilt Card — Studio HALO portfolio
+   各カードに 3D 傾き + ホログラム conic gradient gloss + 光帯 shine
+   6 作品は分野別に異なる CSS ビジュアル（identity / motion / book /
+   restaurant / magazine / packaging）
+   ════════════════════════════════════════════════════════════════ */
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:where(html,body){line-break:strict;word-break:normal;overflow-wrap:break-word}
+:where(h1,h2,h3,h4){text-wrap:balance}
+:where(p,li){text-wrap:pretty}
+
+:root{
+  --bg:#f4f3ee;
+  --ink:#0a0a0a;
+  --muted:#6a6a6a;
+  --line:#d8d6cc;
+  --paper:#fff;
+  --hi:#ff2d55;
+  --alt:#0066ff;
+  --font:'DM Sans','Noto Sans JP',sans-serif;
+  --serif:'Instrument Serif','DM Sans',serif;
+  --mono:'JetBrains Mono',monospace;
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-weight:400;line-height:1.65}
+a{color:inherit;text-decoration:none}
+
+/* ─── HEADER ─── */
+header.site{
+  position:sticky;top:0;z-index:50;background:var(--bg);
+  padding:1rem clamp(1.2rem,4vw,3rem);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  border-bottom:1px solid var(--ink);
+}
+.back{font-family:var(--mono);font-size:.78rem;letter-spacing:.18em;display:inline-flex;align-items:center;gap:.6em}
+.back .arrow{transition:transform .25s}
+.back:hover .arrow{transform:translateX(-.3em)}
+.cell-marker{font-family:var(--mono);font-size:.78rem;letter-spacing:.22em;color:var(--hi)}
+
+/* ─── intro ─── */
+.intro{
+  max-width:1200px;margin:0 auto;
+  padding:clamp(5rem,12vw,9rem) clamp(1.5rem,4vw,3rem) clamp(2.5rem,7vw,4.5rem);
+}
+.kicker{
+  display:inline-block;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.32em;color:var(--muted);
+  margin-bottom:1.8rem;
+}
+.intro h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(3.4rem,12vw,8.5rem);
+  line-height:.94;letter-spacing:-.01em;
+}
+.intro h1 em{font-style:italic;color:var(--hi)}
+.intro .lead{font-size:clamp(1rem,1.25vw,1.15rem);color:var(--muted);max-width:38em;margin-top:1.8rem;line-height:1.95}
+.intro .lead strong{color:var(--ink);font-weight:500;border-bottom:1px solid var(--ink)}
+
+/* ════════════════════════════════════════════
+   COMPONENT: .halo — Studio HALO portfolio
+   ════════════════════════════════════════════ */
+
+.halo{
+  max-width:1320px;
+  margin:0 auto clamp(3rem,6vw,5rem);
+  padding:0 clamp(1.2rem,3vw,2.4rem);
+}
+
+/* ── masthead ── */
+.hl-masthead{
+  display:flex;justify-content:space-between;align-items:center;gap:1.4rem;
+  padding:1rem 0 1.2rem;
+  border-bottom:1px solid var(--ink);
+  margin-bottom:clamp(1.6rem,3vw,2.4rem);
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.24em;color:var(--muted);
+}
+.hl-brand{display:inline-flex;align-items:center;gap:.85rem;flex-wrap:wrap}
+.hl-mark{
+  position:relative;width:22px;height:22px;display:inline-block;
+}
+.hm-ring,.hm-core{position:absolute;border-radius:50%}
+.hm-ring{
+  inset:0;border:1.5px solid var(--ink);
+  clip-path:polygon(50% 0,100% 0,100% 100%,50% 100%,50% 50%,50% 50%);
+  animation:hl-mark-spin 8s linear infinite;
+}
+.hm-core{inset:5px;background:var(--hi)}
+@keyframes hl-mark-spin{
+  0%  {transform:rotate(0)}
+  100%{transform:rotate(360deg)}
+}
+.hl-name{
+  font-family:var(--serif);font-style:italic;color:var(--ink);
+  font-size:1.4rem;line-height:1;letter-spacing:-.005em;
+}
+.hl-sub{color:var(--muted);letter-spacing:.24em;font-size:.68rem}
+
+.hl-meta{
+  list-style:none;display:flex;gap:1.3rem;flex-wrap:wrap;
+}
+.hl-meta li{display:flex;flex-direction:column;gap:.15rem;color:var(--ink);font-weight:500;font-size:.74rem;letter-spacing:.14em}
+.hl-meta li span{color:var(--muted);font-weight:400;letter-spacing:.28em;font-size:.58rem}
+
+@media(max-width:680px){
+  .hl-masthead{flex-direction:column;align-items:flex-start;gap:.9rem}
+}
+
+/* ── grid ── */
+.hl-grid{
+  display:grid;gap:clamp(1rem,2vw,1.6rem);
+  grid-template-columns:1fr;
+}
+@media(min-width:680px){
+  .hl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(min-width:1080px){
+  .hl-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+/* ── tilt-card ── */
+.tilt-card{
+  position:relative;
+  aspect-ratio:.78;
+  perspective:var(--tc-perspective,900px);
+  transform-style:preserve-3d;
+  cursor:pointer;
+  isolation:isolate;
+}
+.tc-inner{
+  position:relative;
+  width:100%;height:100%;
+  background:var(--paper);
+  border:1px solid var(--ink);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  transform-style:preserve-3d;
+  transition:transform .55s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease;
+  box-shadow:0 4px 0 rgba(0,0,0,.04);
+  will-change:transform;
+}
+.tilt-card:hover .tc-inner{
+  box-shadow:
+    0 30px 60px -20px rgba(0,0,0,.28),
+    0 18px 30px -12px rgba(0,0,0,.18);
+}
+
+/* visual block（カードの上部、各作品で異なる） */
+.tc-vis{
+  position:relative;
+  flex:1 1 60%;
+  background:#0a0a0a;
+  overflow:hidden;
+  isolation:isolate;
+  display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid var(--ink);
+}
+.tc-vis > div{position:absolute;inset:0;pointer-events:none}
+.v-mark{
+  position:relative;z-index:5;color:#fff;
+  font-family:var(--serif);font-weight:400;font-style:italic;
+  font-size:clamp(2rem,3.2vw,3.4rem);line-height:.9;letter-spacing:-.01em;
+  text-align:center;
+}
+.v-mark-sub{
+  position:absolute;z-index:5;color:rgba(255,255,255,.65);
+  font-family:var(--mono);font-size:.56rem;letter-spacing:.32em;
+  bottom:1rem;left:50%;transform:translateX(-50%);
+}
+
+/* meta block（カード下半分） */
+.tc-meta{
+  padding:1rem 1.1rem 1.2rem;
+  display:flex;flex-direction:column;gap:.55rem;
+  position:relative;z-index:2;
+  background:var(--paper);
+}
+.tc-no{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.32em;color:var(--hi);
+}
+.tc-title{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(1.3rem,1.8vw,1.7rem);
+  line-height:1.0;letter-spacing:-.005em;color:var(--ink);
+}
+.tc-title em{font-style:italic;color:var(--muted)}
+.tc-spec{
+  display:grid;grid-template-columns:max-content 1fr;column-gap:.7rem;row-gap:.2rem;
+  font-size:.74rem;line-height:1.5;
+  margin-top:.2rem;
+}
+.tc-spec dt{font-family:var(--mono);font-size:.58rem;letter-spacing:.24em;color:var(--muted);padding-top:.18rem}
+.tc-spec dd{color:var(--ink)}
+
+.tc-edition{
+  position:absolute;top:.7rem;right:.85rem;z-index:8;
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.3em;
+  color:rgba(255,255,255,.85);
+  background:rgba(0,0,0,.32);padding:.32em .55em;
+  backdrop-filter:blur(2px);
+  border:1px solid rgba(255,255,255,.15);
+}
+
+/* ── ホログラム gloss（conic gradient、傾きで bg-position 移動） ── */
+.tc-gloss{
+  position:absolute;inset:0;z-index:10;pointer-events:none;
+  background:conic-gradient(
+    from var(--gloss-angle,30deg) at var(--gx,50%) var(--gy,50%),
+    rgba(255,45,85,.22),
+    rgba(180,80,255,.22),
+    rgba(0,180,255,.22),
+    rgba(0,255,180,.22),
+    rgba(255,230,0,.22),
+    rgba(255,45,85,.22)
+  );
+  mix-blend-mode:overlay;
+  opacity:0;
+  transition:opacity .35s ease;
+}
+.tilt-card:hover .tc-gloss{opacity:.85}
+
+/* 光帯 shine（直線的なハイライト） */
+.tc-shine{
+  position:absolute;inset:0;z-index:11;pointer-events:none;
+  background:linear-gradient(
+    var(--shine-angle,115deg),
+    transparent 38%,
+    rgba(255,255,255,.18) 48%,
+    rgba(255,255,255,.32) 52%,
+    rgba(255,255,255,.05) 60%,
+    transparent 72%
+  );
+  background-size:200% 200%;
+  background-position:var(--shine-x,50%) var(--shine-y,50%);
+  mix-blend-mode:screen;
+  opacity:0;
+  transition:opacity .35s ease;
+}
+.tilt-card:hover .tc-shine{opacity:.9}
+
+/* ════════════════════════════════════════════
+   各作品の visual（分野ごとに表情が違う）
+   ════════════════════════════════════════════ */
+
+/* 01 TIDE — identity / wave water blues */
+.tc-vis--tide{background:linear-gradient(180deg,#082238 0%,#0c486a 50%,#114866 100%)}
+.tc-vis--tide .v-wave{
+  background:radial-gradient(ellipse 80% 30% at 50% 50%,rgba(120,200,230,.4),transparent 70%);
+  mix-blend-mode:screen;
+}
+.tc-vis--tide .wave-1{transform:translateY(-15%) scale(1.3,.5)}
+.tc-vis--tide .wave-2{transform:translateY(0)    scale(1.6,.6);opacity:.7}
+.tc-vis--tide .wave-3{transform:translateY(18%)  scale(1.4,.45);opacity:.5}
+.tc-vis--tide::before{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 10px);
+}
+.tc-vis--tide .v-mark{color:#e6f2ff;text-shadow:0 2px 24px rgba(120,200,230,.5);font-style:normal;letter-spacing:.3em;font-family:var(--font);font-weight:500;font-size:1.1rem}
+
+/* 02 APEX MOTION — black / neon mesh */
+.tc-vis--apex{background:#080810}
+.tc-vis--apex .v-mesh{
+  background:
+    radial-gradient(ellipse 50% 35% at 30% 30%,rgba(255,45,85,.45),transparent 60%),
+    radial-gradient(ellipse 55% 40% at 75% 65%,rgba(0,102,255,.45),transparent 60%),
+    radial-gradient(ellipse 40% 30% at 50% 85%,rgba(255,210,0,.25),transparent 65%);
+  filter:blur(4px);
+}
+.tc-vis--apex .v-grid{
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px) 0 0/30px 30px,
+    linear-gradient(0deg, rgba(255,255,255,.06) 1px,transparent 1px) 0 0/30px 30px;
+  opacity:.7;
+}
+.tc-vis--apex .v-streak{
+  background:linear-gradient(115deg,transparent 45%,rgba(255,255,255,.18) 50%,transparent 55%);
+  mix-blend-mode:screen;
+}
+.tc-vis--apex .v-mark{color:#fff;font-family:var(--font);font-weight:700;font-size:2.4rem;letter-spacing:.04em;font-style:normal}
+
+/* 03 FIELD NOTES — cream paper / botanical hint */
+.tc-vis--field{background:linear-gradient(180deg,#ece5d3 0%,#d8cdb1 100%)}
+.tc-vis--field .v-paper{
+  background:
+    radial-gradient(circle at 50% 50%,transparent 60%,rgba(140,110,70,.18) 100%),
+    repeating-linear-gradient(0deg,rgba(110,90,60,.06) 0,rgba(110,90,60,.06) 1px,transparent 1px,transparent 4px);
+}
+.tc-vis--field .v-botanic{
+  background:
+    radial-gradient(ellipse 12% 28% at 20% 30%,rgba(50,80,40,.35),transparent 60%),
+    radial-gradient(ellipse 10% 22% at 80% 70%,rgba(70,90,50,.32),transparent 60%),
+    radial-gradient(ellipse 18% 8% at 65% 25%,rgba(40,70,30,.28),transparent 70%);
+  filter:blur(.6px);
+}
+.tc-vis--field .v-stamp{
+  position:absolute;top:1rem;right:1rem;z-index:6;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.32em;color:rgba(50,40,20,.7);
+  border:1px solid rgba(50,40,20,.4);padding:.3em .55em;
+}
+.tc-vis--field .v-mark{color:#3a2d1a;font-family:var(--serif);font-style:italic;font-weight:400;font-size:2.2rem;line-height:.95}
+
+/* 04 HOUSE OF MIST — warm minimal */
+.tc-vis--mist{background:linear-gradient(180deg,#f5ede3 0%,#e6d8c4 60%,#d4c4a8 100%)}
+.tc-vis--mist .v-fog{
+  background:
+    radial-gradient(ellipse 70% 28% at 50% 40%,rgba(255,255,255,.6),transparent 70%),
+    radial-gradient(ellipse 50% 22% at 50% 70%,rgba(120,90,60,.18),transparent 70%);
+  filter:blur(1px);
+}
+.tc-vis--mist .v-calli{
+  position:absolute;top:24%;left:50%;transform:translateX(-50%);z-index:6;
+  color:#5c4a36;font-family:var(--serif);font-size:5rem;line-height:1;font-weight:400;
+  opacity:.55;
+}
+.tc-vis--mist .v-mark{color:#3a2d1a;font-family:var(--serif);font-style:italic;font-size:1.6rem;font-weight:400;line-height:1;margin-top:2rem}
+
+/* 05 QUARTERLY 03 — bold editorial red */
+.tc-vis--quarterly{background:#bf2435}
+.tc-vis--quarterly .v-q-bg{
+  background:
+    radial-gradient(ellipse 65% 50% at 25% 80%,rgba(0,0,0,.3),transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 20%,rgba(255,255,255,.12),transparent 60%);
+}
+.tc-vis--quarterly .v-q-rule{
+  background:
+    linear-gradient(0deg,transparent 50%,rgba(255,255,255,.6) 50%,rgba(255,255,255,.6) calc(50% + 1px),transparent calc(50% + 1px));
+}
+.tc-vis--quarterly .v-mark{
+  color:#fff;font-family:var(--serif);font-weight:500;font-style:normal;font-size:3.4rem;line-height:.88;letter-spacing:-.01em;text-align:center;
+  font-variation-settings:'wght' 600;
+}
+.tc-vis--quarterly .v-mark-sub{
+  color:rgba(255,255,255,.85);font-family:var(--mono);letter-spacing:.34em;
+}
+.tc-vis--quarterly .v-stamp{
+  position:absolute;top:1rem;left:1rem;z-index:6;
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.3em;color:rgba(255,255,255,.85);
+  border:1px solid rgba(255,255,255,.4);padding:.3em .55em;
+}
+
+/* 06 STRATA SOUND — geometric earth tones layers */
+.tc-vis--strata{background:#c9a87a}
+.tc-vis--strata .v-st-1,
+.tc-vis--strata .v-st-2,
+.tc-vis--strata .v-st-3,
+.tc-vis--strata .v-st-4{position:absolute;inset:auto 0 0 0;height:25%}
+.tc-vis--strata .v-st-1{background:#3d2e22;height:25%}
+.tc-vis--strata .v-st-2{background:#6b4a32;height:50%}
+.tc-vis--strata .v-st-3{background:#a07650;height:75%}
+.tc-vis--strata .v-st-4{background:#c9a87a;height:100%}
+.tc-vis--strata::before{
+  content:"";position:absolute;inset:0;z-index:2;
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 1px,transparent 1px,transparent 4px);
+}
+.tc-vis--strata .v-mark{
+  z-index:5;color:#f4ecdc;font-family:var(--serif);font-style:italic;font-size:2.6rem;line-height:.95;font-weight:400;
+  text-shadow:0 2px 8px rgba(0,0,0,.4);
+}
+.tc-vis--strata .v-mark-sub{color:rgba(244,236,220,.8)}
+
+/* ════════════════════════════════════════════
+   フッター帯（CLIENTS / AWARDS / CONTACT）
+   ════════════════════════════════════════════ */
+.hl-foot{
+  display:grid;grid-template-columns:1fr;gap:clamp(1.4rem,3vw,2.4rem);
+  border-top:1px solid var(--ink);
+  margin-top:clamp(2rem,4vw,3.4rem);padding-top:clamp(1.6rem,3vw,2.4rem);
+}
+@media(min-width:780px){
+  .hl-foot{grid-template-columns:minmax(0,2.2fr) minmax(0,1fr) minmax(0,1fr)}
+}
+.hl-foot-block h4{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.32em;color:var(--muted);
+  font-weight:500;margin-bottom:.7rem;text-transform:uppercase;
+}
+.hl-foot-block p,.hl-foot-block li{font-size:.84rem;line-height:1.65;color:var(--ink)}
+.hl-foot-block ul{list-style:none;display:grid;gap:.2rem}
+.hl-foot-block ul li::before{content:"·\00a0\00a0";color:var(--hi)}
+.hl-foot-block .cta{margin-top:.9rem}
+
+/* CTA */
+.cta{
+  position:relative;display:inline-flex;align-items:center;gap:.6em;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.24em;font-weight:500;
+  color:var(--ink);
+  background:transparent;border:1px solid var(--ink);
+  padding:.85em 1.3em;cursor:pointer;overflow:hidden;
+  transition:color .25s ease,border-color .25s ease;
+}
+.cta::before{content:"";position:absolute;inset:0;background:var(--ink);transform:translateX(-101%);transition:transform .42s cubic-bezier(.7,0,.2,1)}
+.cta > *{position:relative;z-index:1}
+.cta:hover{color:#fff}
+.cta:hover::before{transform:translateX(0)}
+.cta-arrow{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.cta:hover .cta-arrow{transform:translateX(.3em)}
+.cta--solid{background:var(--ink);color:#fff}
+.cta--solid::before{background:var(--hi)}
+.cta--solid:hover{color:#fff}
+
+/* ════════════ reduced motion / coarse pointer ════════════ */
+@media (prefers-reduced-motion: reduce){
+  .tilt-card{perspective:none}
+  .tc-inner{transform:none !important;transition:none}
+  .tc-gloss,.tc-shine{display:none}
+  .hm-ring{animation:none}
+}
+@media (pointer: coarse){
+  .tc-inner{transform:none !important}
+  .tilt-card:hover .tc-gloss,
+  .tilt-card:hover .tc-shine{opacity:.3}
+}
+
+/* END COMPONENT */
+
+
+/* ─── NOTES ─── */
+.notes{max-width:1100px;margin:0 auto;padding:clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,3rem)}
+.shou{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-bottom:1rem;border-bottom:1px solid var(--ink);margin-bottom:2.5rem}
+.shou h2{font-size:clamp(1.3rem,2vw,1.7rem);font-weight:700;letter-spacing:.04em}
+.shou .no{font-family:var(--mono);font-size:.78rem;letter-spacing:.25em;color:var(--muted)}
+.frame{font-size:.92rem;line-height:1.9;color:var(--muted);max-width:46em;margin:-1rem 0 2rem;padding:1rem 1.2rem;border-left:3px solid var(--hi);background:var(--paper)}
+.frame code{font-family:var(--mono);font-size:.88em;background:var(--bg);padding:.1em .35em;border:1px solid var(--line)}
+.notes-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;margin-bottom:3rem}
+@media(min-width:780px){.notes-grid{grid-template-columns:repeat(3,1fr)}}
+.note{position:relative;background:var(--paper);border:1px solid var(--ink);padding:1.5rem 1.4rem 1.4rem}
+.note-no{position:absolute;top:1rem;right:1rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;color:var(--muted)}
+.note h3{font-size:1.02rem;font-weight:700;margin-bottom:.7rem;letter-spacing:.02em}
+.note p{font-size:.86rem;color:var(--muted);line-height:1.8}
+.note code,.var span code{font-family:var(--mono);font-size:.85em;background:var(--bg);padding:.1em .35em;border:1px solid var(--line)}
+.sub-h{font-size:1rem;font-weight:700;letter-spacing:.04em;margin:2rem 0 1rem;padding-bottom:.7rem;border-bottom:1px dashed var(--ink)}
+.vars{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--ink);background:var(--paper)}
+.var{display:grid;grid-template-columns:minmax(8rem,auto) 1fr auto;gap:1rem;padding:.8rem 1rem;border-bottom:1px solid var(--line);align-items:center}
+.var:last-child{border-bottom:none}
+.var code{font-family:var(--mono);font-size:.82rem;color:var(--hi);font-weight:500}
+.var span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.var em{font-family:var(--mono);font-size:.78rem;font-style:normal;color:var(--ink);background:var(--bg);padding:.15em .55em;border:1px solid var(--line);white-space:nowrap}
+@media(max-width:680px){.var{grid-template-columns:1fr;gap:.3rem;padding:.9rem 1rem}.var em{justify-self:start}}
+.a11y{list-style:none;display:grid;gap:.6rem;background:var(--paper);border:1px solid var(--ink);padding:1rem 1.2rem;margin-top:1rem}
+.a11y li{position:relative;padding-left:1.2em;font-size:.88rem;line-height:1.75;color:var(--muted)}
+.a11y li::before{content:"→";position:absolute;left:0;top:0;color:var(--hi);font-family:var(--mono)}
+.a11y code{font-family:var(--mono);font-size:.85em;background:var(--bg);padding:.1em .35em;border:1px solid var(--line)}
+
+/* ─── FOOTER ─── */
+footer{
+  padding:2rem clamp(1.2rem,4vw,3rem) 1.5rem;
+  display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;color:var(--muted);
+  border-top:1px solid var(--ink);
+}
+footer a{color:var(--ink)}
