@@ -14,6 +14,23 @@
 | 依存 | なし（Pure HTML + CSS + Vanilla JS） |
 | 推奨配置 | ポートフォリオ／コレクション／プロダクトカタログ／ローンチ予定リスト |
 
+
+## スキルとして導入 / Install as a skill
+
+このリポジトリは Claude Code / Codex CLI 共通の **`SKILL.md`**（オープン標準）を同梱しており、AI エージェントのスキルとして使えます。リポジトリ自体をスキルディレクトリへリンクするだけです。
+
+This repo ships a cross-agent **`SKILL.md`** (open standard) usable by both Claude Code and Codex CLI. Just link the repo into the agent's skills directory.
+
+```bash
+# Claude Code
+ln -s "$(pwd)" ~/.claude/skills/anim-tilt-card
+# Codex CLI
+ln -s "$(pwd)" ~/.codex/skills/anim-tilt-card
+```
+
+エージェントを再起動すると `description` に基づき自動でマッチします（スキル名: `anim-tilt-card`）。
+Restart the agent; it is matched automatically by the skill's `description` (skill name: `anim-tilt-card`).
+
 ## 仕組み
 
 各 `[data-tilt]` カードの上で `pointermove` を拾い、カード中心からのオフセット (-1..1) を計算。それを `rotateX` / `rotateY` の目標値とし、`requestAnimationFrame` で `cur += (target - cur) * ease` の指数アプローチで滑らかに追従する。
